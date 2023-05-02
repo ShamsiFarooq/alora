@@ -1,4 +1,4 @@
-import 'package:alora/screens/authentication/home/components/other_service_card.dart';
+import 'package:alora/screens/home/components/other_service_card.dart';
 import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 

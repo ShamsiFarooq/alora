@@ -15,21 +15,33 @@ class SocialIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: press,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          border: Border.all(
-            width: 2,
-            color: color2,
+      child: Row(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 2,
+                color: color2,
+              ),
+              shape: BoxShape.circle,
+            ),
+            child: SvgPicture.asset(
+              iconSrc,
+              height: 20,
+              width: 20,
+              color: Color.fromARGB(255, 196, 24, 15),
+            ),
           ),
-          shape: BoxShape.circle,
-        ),
-        child: SvgPicture.asset(
-          iconSrc,
-          height: 20,
-          width: 20,
-        ),
+          Text(
+            "<- sign in with google",
+            style: TextStyle(
+              color: color3,
+              fontSize: 14,
+            ),
+          )
+        ],
       ),
     );
   }

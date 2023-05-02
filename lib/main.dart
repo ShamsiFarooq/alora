@@ -1,6 +1,7 @@
 import 'package:alora/model/user_firbase.dart';
 import 'package:alora/screens/splash/splash_screen.dart';
 import 'package:alora/services/auth_service.dart';
+import 'package:alora/services/google_sign_in_provider.dart';
 import 'package:alora/style/style.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -21,16 +22,19 @@ class MyApp extends StatelessWidget {
     return StreamProvider<Users?>.value(
       value: AuthServices().users,
       initialData: Users(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        home: const ScreenSplash(),
-        theme: ThemeData(
-          textTheme: const TextTheme(
-            titleMedium: TextStyle(
-                color: color5, fontSize: 16), // default TextField input style
+      child: ChangeNotifierProvider(
+        create: (context) => GoogleSignInProveder(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          home: const ScreenSplash(),
+          theme: ThemeData(
+            textTheme: const TextTheme(
+              titleMedium: TextStyle(
+                  color: color5, fontSize: 16), // default TextField input style
+            ),
+            brightness: Brightness.dark,
           ),
-          brightness: Brightness.dark,
         ),
       ),
     );

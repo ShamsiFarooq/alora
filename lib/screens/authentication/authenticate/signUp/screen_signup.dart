@@ -9,9 +9,11 @@ import 'package:alora/screens/components/rounded_button.dart';
 import 'package:alora/screens/components/rounded_password_field.dart';
 import 'package:alora/screens/components/text_field_container.dart';
 import 'package:alora/services/auth_service.dart';
+import 'package:alora/services/google_sign_in_provider.dart';
 import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class ScreenSignUp extends StatefulWidget {
   final Function toggleView;
@@ -116,11 +118,6 @@ class _ScreenSignUpState extends State<ScreenSignUp> {
                     AlreadyAccountCheck(
                       login: false,
                       press: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) {
-                        //       return ScreenLogin(toggleView: null,);
                         widget.toggleView();
                       },
                     ),
@@ -129,24 +126,12 @@ class _ScreenSignUpState extends State<ScreenSignUp> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         SocialIcon(
-                          iconSrc: 'lib/assets/svg/facebook.svg',
-                          press: () {},
-                        ),
-                        SocialIcon(
                           iconSrc: 'lib/assets/svg/google-plus.svg',
-                          press: () {},
-                        ),
-                        SocialIcon(
-                          iconSrc: 'lib/assets/svg/twitter.svg',
                           press: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return const BottomNavBar();
-                                },
-                              ),
-                            );
+                            final provider = Provider.of<GoogleSignInProveder>(
+                                context,
+                                listen: false);
+                            provider.googleLogin();
                           },
                         ),
                       ],

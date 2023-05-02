@@ -1,6 +1,6 @@
 import 'package:alora/screens/chat/chat.dart';
 import 'package:alora/screens/history/history.dart';
-import 'package:alora/screens/authentication/home/home_screen.dart';
+import 'package:alora/screens/home/home_screen.dart';
 import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 
