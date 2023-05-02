@@ -1,5 +1,5 @@
 import 'package:alora/screens/payment/payment.dart';
-import 'package:alora/style/constant.dart';
+import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 
 class PaymentSection extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:alora/screens/chat/chat.dart';
 import 'package:alora/screens/history/history.dart';
-import 'package:alora/screens/home/home_screen.dart';
-import 'package:alora/style/constant.dart';
+import 'package:alora/screens/authentication/home/home_screen.dart';
+import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -13,11 +13,7 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int currentIndexNavBar = 0;
-  final screens = [
-    const ScreenHome(),
-    const ChatScreen(),
-    const HistoryScreen()
-  ];
+  final screens = [ScreenHome(), const ChatScreen(), const HistoryScreen()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

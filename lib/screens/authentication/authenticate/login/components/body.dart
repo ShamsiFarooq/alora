@@ -1,16 +1,24 @@
+import 'package:alora/services/auth_service.dart';
+import 'package:alora/screens/authentication/authenticate/signUp/screen_signup.dart';
 import 'package:alora/screens/components/already_have_an_account_check.dart';
 import 'package:alora/screens/components/round_input_field.dart';
 import 'package:alora/screens/components/rounded_button.dart';
 import 'package:alora/screens/components/rounded_password_field.dart';
-import 'package:alora/screens/signup/screen_signup.dart';
-import 'package:alora/style/constant.dart';
+import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class BodyLogin extends StatelessWidget {
-  const BodyLogin({
+class BodyLogin extends StatefulWidget {
+  BodyLogin({
     super.key,
   });
+
+  @override
+  State<BodyLogin> createState() => _BodyLoginState();
+}
+
+class _BodyLoginState extends State<BodyLogin> {
+  final AuthServices _auth = AuthServices();
 
   @override
   Widget build(BuildContext context) {
@@ -45,19 +53,27 @@ class BodyLogin extends StatelessWidget {
           RoundedButton(
             text: 'LOGIN',
             color: color3,
-            press: () {},
+            press: () async {
+              dynamic result = await _auth.signInAnon();
+              if (result == null) {
+                print('error sign in');
+              } else {
+                print('sign in');
+                print(result.uid);
+              }
+            },
           ),
           height15,
           AlreadyAccountCheck(
             press: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return ScreenSignUp();
-                  },
-                ),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) {
+              //       return ScreenSignUp();
+              //     },
+              //   ),
+              // );
             },
           ),
         ],

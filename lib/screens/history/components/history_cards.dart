@@ -1,5 +1,5 @@
 import 'package:alora/screens/history/history_detail.dart';
-import 'package:alora/style/constant.dart';
+import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 
 class HistoryCard extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:alora/style/constant.dart';
+import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 

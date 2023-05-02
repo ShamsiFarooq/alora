@@ -1,7 +1,8 @@
+import 'package:alora/screens/requirement/location/add_location.dart';
 import 'package:alora/screens/requirement/components/hours_section.dart';
 import 'package:alora/screens/requirement/components/number_of_proffesionals.dart';
 import 'package:alora/screens/requirement/components/payment_section.dart';
-import 'package:alora/style/constant.dart';
+import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 
 class UserRequirementScreen extends StatelessWidget {
@@ -27,6 +28,8 @@ class UserRequirementScreen extends StatelessWidget {
                 typeOfCleaning(),
                 height15,
                 datePickerSection(context),
+                height15,
+                AddLocation(),
                 const SizedBox(
                   height: 20,
                 ),

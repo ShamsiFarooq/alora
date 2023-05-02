@@ -1,5 +1,5 @@
 import 'package:alora/screens/requirement/info_requirement.dart';
-import 'package:alora/style/constant.dart';
+import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 
 class ScrollCard extends StatelessWidget {

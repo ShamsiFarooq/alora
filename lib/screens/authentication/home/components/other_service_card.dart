@@ -1,5 +1,5 @@
 import 'package:alora/screens/chat/chat.dart';
-import 'package:alora/style/constant.dart';
+import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 
 class OtherServiceCard extends StatelessWidget {

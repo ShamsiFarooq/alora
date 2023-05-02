@@ -1,8 +1,8 @@
-import 'package:alora/screens/login/login_screen.dart';
-import 'package:alora/screens/signUp/screen_signup.dart';
+import 'package:alora/screens/authentication/authenticate/login/login_screen.dart';
+import 'package:alora/screens/authentication/authenticate/signUp/screen_signup.dart';
 import 'package:alora/screens/welcome/components/background.dart';
 import 'package:alora/screens/components/rounded_button.dart';
-import 'package:alora/style/constant.dart';
+import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -29,20 +29,18 @@ class Body extends StatelessWidget {
             RoundedButton(
               text: 'LOGIN',
               press: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ScreenLogin()));
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => ScreenLogin()));
               },
               color: color3,
             ),
             RoundedButton(
               text: 'SIGN UP',
               press: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ScreenSignUp()));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => const ScreenSignUp()));
               },
               color: color2,
             ),

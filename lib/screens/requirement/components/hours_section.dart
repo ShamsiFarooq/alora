@@ -1,5 +1,5 @@
 import 'package:alora/screens/components/NumberContainer.dart';
-import 'package:alora/style/constant.dart';
+import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 
 class HoursSection extends StatelessWidget {
@@ -28,9 +28,6 @@ class HoursSection extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
-                  NumberContainer(
-                    number: '1',
-                  ),
                   width15,
                   NumberContainer(
                     number: '2',
@@ -43,15 +40,16 @@ class HoursSection extends StatelessWidget {
                   NumberContainer(
                     number: '4',
                   ),
+                  width15,
+                  NumberContainer(
+                    number: '5',
+                  ),
                 ],
               ),
               height15,
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
-                  NumberContainer(
-                    number: '5',
-                  ),
                   width15,
                   NumberContainer(
                     number: '6',
@@ -63,6 +61,10 @@ class HoursSection extends StatelessWidget {
                   width15,
                   NumberContainer(
                     number: '8',
+                  ),
+                  width15,
+                  NumberContainer(
+                    number: '9',
                   ),
                 ],
               ),

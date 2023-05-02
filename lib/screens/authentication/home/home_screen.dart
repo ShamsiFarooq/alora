@@ -1,10 +1,13 @@
-import 'package:alora/screens/home/components/general_cleaning_scrollview.dart';
-import 'package:alora/screens/home/components/other_service_view.dart';
-import 'package:alora/style/constant.dart';
+import 'package:alora/screens/authentication/home/components/general_cleaning_scrollview.dart';
+import 'package:alora/screens/authentication/home/components/other_service_view.dart';
+import 'package:alora/services/auth_service.dart';
+import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 
 class ScreenHome extends StatelessWidget {
-  const ScreenHome({super.key});
+  ScreenHome({super.key});
+
+  final AuthServices _auth = AuthServices();
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +26,21 @@ class ScreenHome extends StatelessWidget {
             ),
           ),
           centerTitle: true,
+          actions: [
+            ElevatedButton(
+              onPressed: () async {
+                await _auth.signOut();
+                // await FirebaseAuth.instance.signOut();
+              },
+              child: Text('SignOut'),
+              style: ElevatedButton.styleFrom(
+                elevation: 3,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
+          ],
         ),
         body: Container(
           height: 800,
