@@ -1,4 +1,4 @@
-import 'package:alora/services/auth_service.dart';
+import 'package:alora/services/auth/auth_service.dart';
 import 'package:alora/screens/authentication/authenticate/signUp/screen_signup.dart';
 import 'package:alora/screens/components/already_have_an_account_check.dart';
 import 'package:alora/screens/components/round_input_field.dart';

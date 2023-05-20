@@ -1,6 +1,8 @@
+import 'package:alora/screens/authentication/authenticate/login/login_screen.dart';
+import 'package:alora/screens/authentication/wrapper.dart';
 import 'package:alora/screens/home/components/general_cleaning_scrollview.dart';
 import 'package:alora/screens/home/components/other_service_view.dart';
-import 'package:alora/services/auth_service.dart';
+import 'package:alora/services/auth/auth_service.dart';
 import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +31,11 @@ class ScreenHome extends StatelessWidget {
           actions: [
             ElevatedButton(
               onPressed: () async {
-                await _auth.signOut();
+                await _auth.signOut().then((value) {
+                  return Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => Wrapper()));
+                });
+
                 // await FirebaseAuth.instance.signOut();
               },
               child: Text('SignOut'),

@@ -2,14 +2,15 @@ import 'package:alora/screens/authentication/authenticate/login/login_screen.dar
 import 'package:alora/screens/authentication/authenticate/signUp/component/background.dart';
 import 'package:alora/screens/authentication/authenticate/signUp/component/or_divoder.dart';
 import 'package:alora/screens/authentication/authenticate/signUp/component/social_icon.dart';
+import 'package:alora/screens/authentication/wrapper.dart';
 import 'package:alora/screens/bottomnav/bottom_navigation.dart';
 import 'package:alora/screens/components/already_have_an_account_check.dart';
 import 'package:alora/screens/components/round_input_field.dart';
 import 'package:alora/screens/components/rounded_button.dart';
 import 'package:alora/screens/components/rounded_password_field.dart';
 import 'package:alora/screens/components/text_field_container.dart';
-import 'package:alora/services/auth_service.dart';
-import 'package:alora/services/google_sign_in_provider.dart';
+import 'package:alora/services/auth/auth_service.dart';
+import 'package:alora/services/auth/google_sign_in_provider.dart';
 import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -121,21 +122,6 @@ class _ScreenSignUpState extends State<ScreenSignUp> {
                         widget.toggleView();
                       },
                     ),
-                    const OrDivider(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SocialIcon(
-                          iconSrc: 'lib/assets/svg/google-plus.svg',
-                          press: () {
-                            final provider = Provider.of<GoogleSignInProveder>(
-                                context,
-                                listen: false);
-                            provider.googleLogin();
-                          },
-                        ),
-                      ],
-                    )
                   ],
                 ),
               ),
