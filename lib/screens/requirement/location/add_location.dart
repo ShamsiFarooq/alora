@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:alora/screens/requirement/info_requirement.dart';
 import 'package:alora/screens/requirement/location/functions.dart';
 import 'package:alora/services/bloc/location/location_bloc.dart';
 import 'package:alora/style/style.dart';
@@ -22,16 +23,16 @@ class AddLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return BlocBuilder<LocationBloc, LocationState>(
       builder: (context, state) {
         controllerAddress.text = state.address;
+        location = controllerAddress.text;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              "5. Add Location",
+              "8. Add Location",
               style: TextStyle(
                 fontSize: 18,
                 color: color5,

@@ -10,7 +10,7 @@ Column typeOfCleaning() {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: const [
       Text(
-        "3. Wich type of cleaning do want...?",
+        "5. Wich type of cleaning do want...?",
         style: TextStyle(
           fontSize: 18,
           color: color5,
@@ -38,7 +38,7 @@ class _DateTimePicState extends State<DateTimePic> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          "4. Please select the date and time",
+          "7. Please select the date and time",
           style: TextStyle(
             fontSize: 18,
             color: color5,

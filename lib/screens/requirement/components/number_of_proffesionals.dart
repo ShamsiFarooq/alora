@@ -18,7 +18,7 @@ class NumberOfProfessionalsWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: const [
             Text(
-              "2. How many professional do you want...?",
+              "4. How many professional do you want...?",
               style: TextStyle(
                 fontSize: 18,
                 color: color5,

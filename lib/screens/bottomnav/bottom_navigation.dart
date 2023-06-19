@@ -1,3 +1,4 @@
+import 'package:alora/firebase/requirement.dart';
 import 'package:alora/screens/chat/chat.dart';
 import 'package:alora/screens/history/history.dart';
 import 'package:alora/screens/home/home_screen.dart';
@@ -13,7 +14,13 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int currentIndexNavBar = 0;
-  final screens = [ScreenHome(), const ChatScreen(), const HistoryScreen()];
+  final screens = [
+    ScreenHome(),
+    ChatScreen(),
+    HistoryScreen(
+      userId: userId,
+    )
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -6,8 +6,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 final String userId = FirebaseAuth.instance.currentUser!.email.toString();
 
 class RequirementAdd {
-  Future<void> addFromClient(int hours, int professionals, String cleaningType,
-      String dateAndTime, String location) async {
+  Future<void> addFromClient(
+      String documentId,
+      int hours,
+      int professionals,
+      String cleaningType,
+      String dateAndTime,
+      String location,
+      String nameInfo,
+      String contactInfo) async {
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
     final CollectionReference userCollection = firestore.collection("users");
     final DocumentSnapshot userDoc = await userCollection.doc(userId).get();
@@ -24,11 +31,15 @@ class RequirementAdd {
         final List<dynamic> custemerRequirement =
             docData.data()?['userrequirement'] ?? [];
         custemerRequirement.add({
+          'documentId': userId,
           'hours': hours,
           'professional': professionals,
-          'cleanintype': cleaningType,
+          'cleanigtype': cleaningType,
           'datetime': dateAndTime,
           'location': location,
+          'contactname': nameInfo,
+          'contactnumber': contactInfo,
+          'status': null,
         });
         await FirebaseFirestore.instance
             .collection('users')
