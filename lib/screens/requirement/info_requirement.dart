@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:alora/firebase/requirement.dart';
+import 'package:alora/services/database.dart';
 import 'package:alora/screens/history/history.dart';
 import 'package:alora/screens/requirement/components/personal_info.dart';
 import 'package:alora/screens/requirement/functions.dart';
@@ -13,7 +13,8 @@ import 'package:quickalert/quickalert.dart';
 dynamic hours = 0;
 int professionals = 0;
 String cleaningType = "";
-String dateAndTime = "";
+String dateTo = "";
+String timeTo = "";
 String location = "";
 String contactName = "";
 String contactNumber = "";
@@ -29,6 +30,7 @@ class UserRequirementScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: color5,
           title: Text("Requirements"),
+          centerTitle: true,
         ),
         // body: CategoryScreen(),
         body: SingleChildScrollView(
@@ -57,12 +59,13 @@ class UserRequirementScreen extends StatelessWidget {
                   children: [
                     ElevatedButton(
                       onPressed: () async {
-                        await RequirementAdd().addFromClient(
+                        await DatabaseServices().addUserRequirement(
                           userId,
                           hours,
                           professionals,
                           cleaningType,
-                          dateAndTime,
+                          dateTo,
+                          timeTo,
                           location,
                           contactName,
                           contactNumber,
@@ -75,7 +78,7 @@ class UserRequirementScreen extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: color4,
+                        backgroundColor: color5,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -99,12 +102,12 @@ class UserRequirementScreen extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: color4,
+                        backgroundColor: color5,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: Text("GO to Order Page"),
+                      child: Text("Go to Order Page"),
                     ),
                   ],
                 ),

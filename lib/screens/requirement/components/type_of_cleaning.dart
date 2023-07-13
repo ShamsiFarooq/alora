@@ -16,8 +16,8 @@ class _TypeOfCleaningState extends State<TypeOfCleaning> {
   @override
   bool selected = false;
   final List<ItemModel> _chipsList = [
-    ItemModel("Normal Cleaning", color2, false),
-    ItemModel("Deep Cleaning", color2, false),
+    ItemModel("Normal Cleaning", lightBlue, false),
+    ItemModel("Deep Cleaning", lightBlue, false),
   ];
 
   @override
@@ -49,11 +49,11 @@ class _TypeOfCleaningState extends State<TypeOfCleaning> {
         padding: const EdgeInsets.only(left: 0, right: 0),
         child: FilterChip(
           padding: const EdgeInsets.all(8),
-          selectedColor: color5,
-          checkmarkColor: color1,
+          selectedColor: color3,
+          checkmarkColor: Colors.green,
           label: Text(_chipsList[i].label),
           labelStyle: _chipsList[i].isSelected
-              ? TextStyle(color: color1, fontSize: 16)
+              ? TextStyle(color: color5, fontSize: 16)
               : TextStyle(color: color5, fontSize: 16),
           backgroundColor: _chipsList[i].color,
           selected: i == selectedIndex,

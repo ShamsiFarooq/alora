@@ -1,30 +1,50 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 final String userId = FirebaseAuth.instance.currentUser!.email.toString();
+final currentUser = FirebaseAuth.instance.currentUser;
+final String uidd = currentUser?.uid as String;
 
-class RequirementAdd {
-  Future<void> addFromClient(
+class DatabaseServices {
+  final String? uid;
+  DatabaseServices({this.uid});
+
+  final CollectionReference audibleCollection =
+      FirebaseFirestore.instance.collection('users');
+  Future addUserData({
+    String? name,
+    String? email,
+    String? password,
+    String? googleId,
+  }) async {
+    final collectionId = audibleCollection.doc(uid);
+    return await collectionId.set({
+      'id': collectionId.id,
+      'username': name,
+      'mail': email,
+      'password': password,
+    });
+  }
+
+  Future<void> addUserRequirement(
       String documentId,
       int hours,
       int professionals,
       String cleaningType,
-      String dateAndTime,
+      String dateTo,
+      String timeTo,
       String location,
       String nameInfo,
       String contactInfo) async {
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
-    final CollectionReference userCollection = firestore.collection("users");
-    final DocumentSnapshot userDoc = await userCollection.doc(userId).get();
-
+    final CollectionReference orderCollection = firestore.collection("orders");
+    final DocumentSnapshot userDoc = await orderCollection.doc(userId).get();
     if (!userDoc.exists) {
-      await userCollection.doc(userId).set({'userrequirement': []});
+      await orderCollection.doc(userId).set({'userrequirement': []});
     }
     try {
       final docData = await FirebaseFirestore.instance
-          .collection("users")
+          .collection("orders")
           .doc(userId)
           .get();
       if (docData.exists) {
@@ -35,14 +55,15 @@ class RequirementAdd {
           'hours': hours,
           'professional': professionals,
           'cleanigtype': cleaningType,
-          'datetime': dateAndTime,
+          'date': dateTo,
+          'time': timeTo,
           'location': location,
           'contactname': nameInfo,
           'contactnumber': contactInfo,
           'status': null,
         });
         await FirebaseFirestore.instance
-            .collection('users')
+            .collection('orders')
             .doc(userId)
             .update({'userrequirement': custemerRequirement});
       }

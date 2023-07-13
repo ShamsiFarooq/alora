@@ -35,10 +35,10 @@ class SocialIcon extends StatelessWidget {
             ),
           ),
           Text(
-            "<- sign in with google",
+            "<- sign in with google account",
             style: TextStyle(
               color: color3,
-              fontSize: 14,
+              fontSize: 15,
             ),
           )
         ],

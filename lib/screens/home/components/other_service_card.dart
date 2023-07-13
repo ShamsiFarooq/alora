@@ -1,4 +1,5 @@
 import 'package:alora/screens/chat/chat.dart';
+import 'package:alora/services/database.dart';
 import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,9 @@ class OtherServiceCard extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return ChatScreen();
+              return UserChatScreen(
+                userId: uidd,
+              );
             },
           ),
         );

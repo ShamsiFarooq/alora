@@ -54,13 +54,13 @@ class _BodyLoginState extends State<BodyLogin> {
             text: 'LOGIN',
             color: color3,
             press: () async {
-              dynamic result = await _auth.signInAnon();
-              if (result == null) {
-                print('error sign in');
-              } else {
-                print('sign in');
-                print(result.uid);
-              }
+              // dynamic result = await _auth.signInAnon();
+              // if (result == null) {
+              //   print('error sign in');
+              // } else {
+              //   print('sign in');
+              //   print(result.uid);
+              // }
             },
           ),
           height15,

@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:alora/screens/requirement/components/type_of_cleaning.dart';
 import 'package:alora/screens/requirement/info_requirement.dart';
 import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 Column typeOfCleaning() {
   return Column(
@@ -32,6 +31,7 @@ class DateTimePic extends StatefulWidget {
 
 class _DateTimePicState extends State<DateTimePic> {
   DateTime dateTime = DateTime(2023, 12, 24, 0, 00);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -54,15 +54,16 @@ class _DateTimePicState extends State<DateTimePic> {
               child: ElevatedButton(
                 onPressed: pickDayTime,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: color5,
+                  backgroundColor: lightBlue,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
                 child: Text(
-                  "${dateTime.day}/${dateTime.month}/${dateTime.year}  ${dateTime.hour} : ${dateTime.minute} ",
+                  "${_formatDateTime(dateTime)}",
                   style: const TextStyle(
                     fontSize: 17,
+                    color: color5,
                   ),
                 ),
               ),
@@ -73,16 +74,17 @@ class _DateTimePicState extends State<DateTimePic> {
     );
   }
 
-  Future<TimeOfDay?> picTime() {
+  Future<TimeOfDay?> pickTime() {
     return showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute));
+      context: context,
+      initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+    );
   }
 
   Future pickDayTime() async {
     DateTime? date = await datePicker(context);
     if (date == null) return;
-    TimeOfDay? time = await picTime();
+    TimeOfDay? time = await pickTime();
     if (time == null) return;
 
     final dateTime = DateTime(
@@ -93,18 +95,30 @@ class _DateTimePicState extends State<DateTimePic> {
       time.minute,
     );
 
-    dateAndTime = dateTime.toString();
-    //log(dateAndTime);
     setState(() {
       this.dateTime = dateTime;
     });
   }
+
+  String _formatDateTime(DateTime dateTime) {
+    final String formattedDate = DateFormat('dd/MM/yyyy').format(dateTime);
+    final String formattedTime = DateFormat('hh:mm a').format(dateTime);
+    dateTo = formattedDate;
+    timeTo = formattedTime;
+    return '$formattedDate  $formattedTime';
+  }
+}
+
+String _formatDateTime(DateTime dateTime) {
+  final String formattedDate = DateFormat('dd/MM/yyyy').format(dateTime);
+  final String formattedTime = DateFormat('hh:mm a').format(dateTime);
+  return '$formattedDate  $formattedTime';
 }
 
 Future<DateTime?> datePicker(BuildContext context) async {
   return await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2022),
+      firstDate: DateTime(2023),
       lastDate: DateTime(2035));
 }

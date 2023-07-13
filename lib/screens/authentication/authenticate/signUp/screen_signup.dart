@@ -1,20 +1,11 @@
-import 'package:alora/screens/authentication/authenticate/login/login_screen.dart';
 import 'package:alora/screens/authentication/authenticate/signUp/component/background.dart';
-import 'package:alora/screens/authentication/authenticate/signUp/component/or_divoder.dart';
-import 'package:alora/screens/authentication/authenticate/signUp/component/social_icon.dart';
-import 'package:alora/screens/authentication/wrapper.dart';
-import 'package:alora/screens/bottomnav/bottom_navigation.dart';
 import 'package:alora/screens/components/already_have_an_account_check.dart';
-import 'package:alora/screens/components/round_input_field.dart';
 import 'package:alora/screens/components/rounded_button.dart';
-import 'package:alora/screens/components/rounded_password_field.dart';
 import 'package:alora/screens/components/text_field_container.dart';
 import 'package:alora/services/auth/auth_service.dart';
-import 'package:alora/services/auth/google_sign_in_provider.dart';
 import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
 
 class ScreenSignUp extends StatefulWidget {
   final Function toggleView;
@@ -26,9 +17,11 @@ class ScreenSignUp extends StatefulWidget {
 
 class _ScreenSignUpState extends State<ScreenSignUp> {
   var nameController = TextEditingController();
+  var emailController = TextEditingController();
   var passwordController = TextEditingController();
   final AuthServices _auth = AuthServices();
   final _formKey = GlobalKey<FormState>();
+  String name = "";
   String email = "";
   String password = "";
   String error = "";
@@ -55,6 +48,22 @@ class _ScreenSignUpState extends State<ScreenSignUp> {
                     SvgPicture.asset(
                       "lib/assets/svg/signup.svg",
                       height: size.height * 0.35,
+                    ),
+                    TextFieldContainer(
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: color5),
+                          ),
+                          hintText: "Name",
+                          border: InputBorder.none,
+                        ),
+                        validator: (value) =>
+                            value!.length < 3 ? "enter real name" : null,
+                        onChanged: (value) {
+                          setState(() => name = value);
+                        },
+                      ),
                     ),
                     TextFieldContainer(
                       child: TextFormField(
@@ -107,8 +116,9 @@ class _ScreenSignUpState extends State<ScreenSignUp> {
                       color: color5,
                       press: () async {
                         if (_formKey.currentState!.validate()) {
-                          dynamic result = await _auth
-                              .signUpWithEmailAndPassword(email, password);
+                          dynamic result =
+                              await _auth.signUpWithEmailAndPassword(
+                                  email, password, name);
                           if (result == null) {
                             setState(() => error = 'pleas give a valid email');
                           }

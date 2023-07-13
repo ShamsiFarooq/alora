@@ -5,12 +5,13 @@ import 'package:flutter/material.dart';
 class ScrollCard extends StatelessWidget {
   final Color color;
   final String title;
-  final String subTitle;
-  const ScrollCard(
-      {super.key,
-      required this.color,
-      required this.title,
-      required this.subTitle});
+  final String image;
+  ScrollCard({
+    super.key,
+    required this.color,
+    required this.title,
+    required this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,37 +21,40 @@ class ScrollCard extends StatelessWidget {
           return UserRequirementScreen();
         }));
       },
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10.0),
-        padding: const EdgeInsets.only(left: 20),
-        height: 120,
-        width: 180,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                color: color1,
-                fontSize: 18,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          width: 200,
+          height: 120,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            border: Border.all(
+              color: color,
+              width: 3,
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 70,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(image),
+                  ),
+                ),
               ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Text(
-              subTitle,
-              style: TextStyle(
-                color: color1,
-                fontSize: 16,
+              height15,
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: color5,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

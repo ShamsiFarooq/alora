@@ -1,117 +1,154 @@
-import 'package:flutter/material.dart';
+import 'package:alora/services/database.dart';
+import 'package:alora/style/style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 
-class ChatScreen extends StatefulWidget {
-  @override
-  _ChatScreenState createState() => _ChatScreenState();
+String generateChatRoomId(String userId, String adminId) {
+  final ids = [userId, adminId];
+  ids.sort(); // Sort the IDs to ensure consistent chat room IDs
+  final concatenatedIds = ids.join('_');
+  final bytes = utf8.encode(concatenatedIds);
+  final hash = sha1.convert(bytes);
+  return hash.toString();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
-  TextEditingController _messageController = TextEditingController();
-  String? _userName;
+class UserChatScreen extends StatefulWidget {
+  final String userId;
+  final String adminId = 'alora_admin'; // Set the admin ID
+
+  UserChatScreen({required this.userId});
 
   @override
-  void dispose() {
-    _messageController.dispose();
-    super.dispose();
+  _UserChatScreenState createState() => _UserChatScreenState();
+}
+
+class _UserChatScreenState extends State<UserChatScreen> {
+  CollectionReference messagesCollection =
+      FirebaseFirestore.instance.collection('messages');
+
+  String chatRoomId = '';
+  final TextEditingController _textEditingController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    getChatRoomId();
   }
 
-  void _saveUserName() {
-    // Save the user name to the database
-    FirebaseFirestore.instance
-        .collection('user')
-        .doc()
-        .set({'name': _userName});
-  }
-
-  void _sendMessage() {
-    String messageText = _messageController.text.trim();
-    if (messageText.isNotEmpty) {
-      // Save the message to the database
-      FirebaseFirestore.instance.collection('messages').add({
-        'sender': _userName,
-        'text': messageText,
-        'timestamp': DateTime.now(),
-      });
-      _messageController.clear();
-    }
+  void getChatRoomId() {
+    chatRoomId = generateChatRoomId(widget.userId, widget.adminId);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text('User Chat'),
+        backgroundColor: Colors.black,
+        title: Text('Chat Room'),
       ),
       body: Column(
         children: [
-          SizedBox(height: 16.0),
-          Text('Please enter your name:'),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: TextField(
-              onChanged: (value) {
-                _userName = value;
-              },
-            ),
-          ),
-          ElevatedButton(
-            onPressed: _saveUserName,
-            child: Text('Save Name'),
-          ),
-          SizedBox(height: 16.0),
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
+              stream: messagesCollection
+                  .doc(chatRoomId)
                   .collection('messages')
-                  .orderBy('timestamp')
+                  .orderBy('timestamp', descending: true)
                   .snapshots(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return Center(child: CircularProgressIndicator());
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasData) {
+                  final messages = snapshot.data!.docs.map((doc) {
+                    final data = doc.data() as Map<String, dynamic>;
+
+                    return ChatMessage(
+                      sender: data['sender'],
+                      message: data['message'],
+                    );
+                  }).toList();
+
+                  return ListView.builder(
+                    reverse: true,
+                    itemCount: messages.length,
+                    itemBuilder: (context, index) {
+                      final message = messages[index];
+                      return ListTile(
+                        title: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Flexible(
+                              fit: FlexFit.loose,
+                              child: Container(
+                                margin:
+                                    const EdgeInsets.symmetric(vertical: 10.0),
+                                decoration: const BoxDecoration(
+                                  color: majanda,
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(15),
+                                    bottomRight: Radius.circular(15),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    message.sender + ': ' + message.message,
+                                    style: const TextStyle(color: color1),
+                                    overflow: TextOverflow.visible,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
                 }
 
-                List<DocumentSnapshot> messages = snapshot.data!.docs;
-
-                return ListView.builder(
-                  itemCount: messages.length,
-                  itemBuilder: (context, index) {
-                    Map<String, dynamic>? data =
-                        messages[index].data() as Map<String, dynamic>?;
-                    String sender = data != null ? data['sender'] ?? '' : '';
-                    String text = data != null ? data['text'] ?? '' : '';
-
-                    return ListTile(
-                      title: Text(sender),
-                      subtitle: Text(text),
-                    );
-                  },
-                );
+                return const CircularProgressIndicator();
               },
             ),
           ),
-          SizedBox(height: 16.0),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _messageController,
-                    decoration: InputDecoration(
-                      hintText: 'Enter your message...',
-                    ),
-                  ),
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: _textEditingController,
+              decoration: InputDecoration(
+                labelText: 'Enter Message',
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.send),
+                  onPressed: () {
+                    _sendMessage(
+                        _textEditingController.text.trim(), widget.userId);
+                    _textEditingController.clear();
+                  },
                 ),
-                IconButton(
-                  onPressed: _sendMessage,
-                  icon: Icon(Icons.send),
-                ),
-              ],
+              ),
             ),
           ),
         ],
       ),
     );
   }
+
+  void _sendMessage(String message, String userId) async {
+    if (message.isNotEmpty) {
+      await messagesCollection.doc(chatRoomId).collection('messages').add({
+        'sender': uidd,
+        'receiver': 'alora_admin',
+        'message': message,
+        'timestamp': DateTime.now(),
+      });
+    }
+  }
+}
+
+class ChatMessage {
+  final String sender;
+  final String message;
+
+  ChatMessage({required this.sender, required this.message});
 }

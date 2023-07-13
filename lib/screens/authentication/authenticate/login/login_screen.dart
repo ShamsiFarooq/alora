@@ -1,12 +1,8 @@
-import 'package:alora/screens/authentication/authenticate.dart';
 import 'package:alora/screens/authentication/authenticate/signUp/component/or_divoder.dart';
 import 'package:alora/screens/authentication/authenticate/signUp/component/social_icon.dart';
-import 'package:alora/screens/authentication/authenticate/signUp/screen_signup.dart';
 import 'package:alora/screens/authentication/wrapper.dart';
 import 'package:alora/screens/components/already_have_an_account_check.dart';
-import 'package:alora/screens/components/round_input_field.dart';
 import 'package:alora/screens/components/rounded_button.dart';
-import 'package:alora/screens/components/rounded_password_field.dart';
 import 'package:alora/screens/components/text_field_container.dart';
 import 'package:alora/services/auth/auth_service.dart';
 import 'package:alora/services/auth/google_sign_in_provider.dart';

@@ -35,7 +35,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
         Container(
           padding: const EdgeInsets.only(top: 3, left: 10),
           decoration: BoxDecoration(
-            color: color2,
+            color: lightBlue,
             borderRadius: BorderRadius.circular(29),
           ),
           child: TextFormField(
@@ -70,7 +70,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
         Container(
           padding: const EdgeInsets.only(top: 3, left: 10),
           decoration: BoxDecoration(
-            color: color2,
+            color: lightBlue,
             borderRadius: BorderRadius.circular(29),
           ),
           child: TextFormField(

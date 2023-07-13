@@ -1,3 +1,4 @@
+import 'package:alora/screens/bottomnav/bottom_navigation.dart';
 import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,9 +11,30 @@ class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: color1,
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text('Requirement History'),
+        backgroundColor: Colors.deepPurple[400],
+        title: const Text(
+          'Requirement History',
+          style: TextStyle(color: color1, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        leading: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.deepPurple[400],
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BottomNavBar(),
+                ),
+              );
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: color1,
+            )),
       ),
       body: StreamBuilder<List<Map<String, dynamic>>>(
         stream: getUserRequirementsHistoryStream(userId: userId),
@@ -24,13 +46,16 @@ class HistoryScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final requirement = userRequirementsHistory[index];
                 final status = requirement['status'];
+                final color = index % 2 == 0
+                    ? Color.fromARGB(255, 215, 44, 245) // First color
+                    : Colors.lightBlue; // Second color
 
                 return Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(15.0),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: color2,
-                      borderRadius: BorderRadius.circular(29),
+                      color: color,
+                      borderRadius: BorderRadius.circular(15),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -39,7 +64,7 @@ class HistoryScreen extends StatelessWidget {
                           'Status: $status',
                           style: const TextStyle(
                             fontSize: 18,
-                            color: Colors.red,
+                            color: color1,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -51,32 +76,28 @@ class HistoryScreen extends StatelessWidget {
                               'Date and Time: ${requirement['datetime']}',
                               style: const TextStyle(
                                 fontSize: 16,
-                                color: color5,
-                                fontWeight: FontWeight.bold,
+                                color: color1,
                               ),
                             ),
                             Text(
                               'Hours: ${requirement['hours']}',
                               style: const TextStyle(
                                 fontSize: 16,
-                                color: color5,
-                                fontWeight: FontWeight.bold,
+                                color: color1,
                               ),
                             ),
                             Text(
                               'Professional: ${requirement['professional']}',
                               style: const TextStyle(
                                 fontSize: 16,
-                                color: color5,
-                                fontWeight: FontWeight.bold,
+                                color: color1,
                               ),
                             ),
                             Text(
                               'Location: ${requirement['location']}',
                               style: const TextStyle(
                                 fontSize: 16,
-                                color: color5,
-                                fontWeight: FontWeight.bold,
+                                color: color1,
                               ),
                             ),
                             // Add more details as needed
@@ -102,7 +123,7 @@ class HistoryScreen extends StatelessWidget {
 Stream<List<Map<String, dynamic>>> getUserRequirementsHistoryStream(
     {required String userId}) {
   return FirebaseFirestore.instance
-      .collection('users')
+      .collection('orders')
       .doc(userId)
       .snapshots()
       .map((snapshot) {

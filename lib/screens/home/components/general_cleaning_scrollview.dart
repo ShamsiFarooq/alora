@@ -1,6 +1,8 @@
 import 'package:alora/screens/home/components/cleaning_type.dart';
+import 'package:alora/screens/requirement/info_requirement.dart';
 import 'package:alora/style/style.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class GeneralCleaningScrollView extends StatelessWidget {
   const GeneralCleaningScrollView({
@@ -14,34 +16,34 @@ class GeneralCleaningScrollView extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(
           left: 20,
-          top: 20,
+          top: 10,
         ),
         child: Row(
-          children: const [
+          children: [
             ScrollCard(
-              color: color4,
-              title: "Villa Cleaning/",
-              subTitle: " Flat cleanig",
-            ),
-            ScrollCard(
-              color: color2,
-              title: "Moving in/",
-              subTitle: "Moving out",
-            ),
-            ScrollCard(
-              color: color5,
-              title: "Office",
-              subTitle: "Cleaning",
+              color: color3,
+              title: "Flat/Villa Cleaning",
+              image: 'lib/assets/img/villacleaning.jpeg',
             ),
             ScrollCard(
               color: color3,
-              title: "After party",
-              subTitle: "Cleaning",
+              title: "Moving in/out",
+              image: 'lib/assets/img/moveinout.jpeg',
             ),
             ScrollCard(
-              color: color2,
-              title: "Maintenance",
-              subTitle: "Cleaning",
+              color: color3,
+              title: "Office Cleaning",
+              image: 'lib/assets/img/officeclean.webp',
+            ),
+            ScrollCard(
+              color: color3,
+              title: "After party Cleaning",
+              image: 'lib/assets/img/afterparty.jpeg',
+            ),
+            ScrollCard(
+              color: color3,
+              title: "Maintenance Cleaning",
+              image: 'lib/assets/img/maintenance.jpeg',
             ),
           ],
         ),

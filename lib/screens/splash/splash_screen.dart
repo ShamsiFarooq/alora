@@ -1,4 +1,3 @@
-import 'package:alora/screens/authentication/authenticate/login/login_screen.dart';
 import 'package:alora/screens/authentication/wrapper.dart';
 import 'package:alora/screens/splash/splash_functions.dart';
 import 'package:alora/style/style.dart';
@@ -14,7 +13,7 @@ class ScreenSplash extends StatelessWidget {
       child: AnimatedSplashScreen(
         splash: logoImage(),
         duration: 3000,
-        nextScreen: Wrapper(),
+        nextScreen: const Wrapper(),
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: color2,
       ),

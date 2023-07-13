@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:alora/screens/requirement/info_requirement.dart';
 import 'package:alora/screens/requirement/location/functions.dart';
 import 'package:alora/services/bloc/location/location_bloc.dart';
@@ -26,6 +24,7 @@ class AddLocation extends StatelessWidget {
     return BlocBuilder<LocationBloc, LocationState>(
       builder: (context, state) {
         controllerAddress.text = state.address;
+
         location = controllerAddress.text;
 
         return Column(
@@ -53,7 +52,7 @@ class AddLocation extends StatelessWidget {
                           .add(AddressDisply(position: position));
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: color5,
+                      backgroundColor: lightBlue,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -62,6 +61,8 @@ class AddLocation extends StatelessWidget {
                       'Add Location',
                       style: TextStyle(
                         fontSize: 17,
+                        color: color5,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -73,7 +74,7 @@ class AddLocation extends StatelessWidget {
               padding: const EdgeInsets.only(top: 3, left: 10),
               width: size.width * 0.8,
               decoration: BoxDecoration(
-                color: color2,
+                color: lightBlue,
                 borderRadius: BorderRadius.circular(29),
               ),
               child: TextFormField(
@@ -83,7 +84,7 @@ class AddLocation extends StatelessWidget {
                 maxLines: null,
                 decoration: InputDecoration(
                   hintText: "Address",
-                  fillColor: color4,
+                  fillColor: color5,
                   hintStyle: const TextStyle(color: color4),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),

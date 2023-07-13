@@ -1,7 +1,4 @@
-import 'package:alora/firebase/requirement.dart';
 import 'package:alora/model/user_firbase.dart';
-import 'package:alora/screens/bottomnav/bottom_navigation.dart';
-import 'package:alora/screens/history/history.dart';
 import 'package:alora/screens/splash/splash_screen.dart';
 import 'package:alora/services/auth/auth_service.dart';
 import 'package:alora/services/auth/google_sign_in_provider.dart';

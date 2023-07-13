@@ -15,10 +15,10 @@ class ScreenHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: color1,
+        backgroundColor: color2,
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: color3,
+          backgroundColor: color2,
           title: const Text(
             "ALORA",
             style: TextStyle(
@@ -29,60 +29,76 @@ class ScreenHome extends StatelessWidget {
           ),
           centerTitle: true,
           actions: [
-            ElevatedButton(
-              onPressed: () async {
-                await _auth.signOut().then((value) {
-                  return Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => Wrapper()));
-                });
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () async {
+                  await _auth.signOut().then((value) {
+                    return Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => Wrapper()));
+                  });
 
-                // await FirebaseAuth.instance.signOut();
-              },
-              child: Text('SignOut'),
-              style: ElevatedButton.styleFrom(
-                elevation: 3,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  // await FirebaseAuth.instance.signOut();
+                },
+                child: Text(
+                  'SignOut',
+                  style: TextStyle(
+                    color: color5,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: color1,
+                  elevation: 3,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
             ),
           ],
         ),
-        body: Container(
-          height: 800,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            color: color1,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
-            ),
+        body: Padding(
+          padding: const EdgeInsets.only(
+            top: 15,
+            left: 8,
+            right: 8,
           ),
-          child: ListView(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(
-                  left: 20,
-                  top: 30,
-                ),
-                child: Text(
-                  "General Cleaning",
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: color5,
-                    fontWeight: FontWeight.w500,
+          child: Container(
+            height: 800,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              color: color1,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+            ),
+            child: ListView(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(
+                    left: 20,
+                    top: 20,
+                  ),
+                  child: Text(
+                    "General Cleaning",
+                    style: TextStyle(
+                      fontSize: 22,
+                      color: color5,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-              ),
-              GeneralCleaningScrollView(),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 20,
-                  horizontal: 20,
+                GeneralCleaningScrollView(),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 20,
+                    horizontal: 20,
+                  ),
+                  child: OtherServiceView(),
                 ),
-                child: OtherServiceView(),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
