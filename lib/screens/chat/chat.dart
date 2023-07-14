@@ -29,7 +29,6 @@ class _UserChatScreenState extends State<UserChatScreen> {
       FirebaseFirestore.instance.collection('messages');
 
   String chatRoomId = '';
-  final TextEditingController _textEditingController = TextEditingController();
 
   @override
   void initState() {
@@ -41,13 +40,15 @@ class _UserChatScreenState extends State<UserChatScreen> {
     chatRoomId = generateChatRoomId(widget.userId, widget.adminId);
   }
 
+  final TextEditingController _textEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('Chat Room'),
+        title: const Text('Chat Room'),
       ),
       body: Column(
         children: [
@@ -75,33 +76,44 @@ class _UserChatScreenState extends State<UserChatScreen> {
                     itemCount: messages.length,
                     itemBuilder: (context, index) {
                       final message = messages[index];
-                      return ListTile(
-                        title: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Flexible(
-                              fit: FlexFit.loose,
-                              child: Container(
-                                margin:
-                                    const EdgeInsets.symmetric(vertical: 10.0),
-                                decoration: const BoxDecoration(
-                                  color: majanda,
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(15),
-                                    bottomRight: Radius.circular(15),
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    message.sender + ': ' + message.message,
-                                    style: const TextStyle(color: color1),
-                                    overflow: TextOverflow.visible,
-                                  ),
-                                ),
-                              ),
+                      final bool isCurrentUser =
+                          message.sender == widget.userId;
+                      final bool isAdmin = message.sender == widget.adminId;
+                      final senderName = isCurrentUser
+                          ? 'You'
+                          : (isAdmin ? 'Admin' : message.sender);
+
+                      return Align(
+                        alignment: isCurrentUser
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(vertical: 10.0),
+                          decoration: BoxDecoration(
+                            color: isCurrentUser ? Colors.green : Colors.blue,
+                            borderRadius: BorderRadius.only(
+                              topRight: isCurrentUser
+                                  ? const Radius.circular(15)
+                                  : Radius.zero,
+                              topLeft: isAdmin
+                                  ? const Radius.circular(15)
+                                  : Radius.zero,
+                              bottomRight: isCurrentUser
+                                  ? Radius.zero
+                                  : const Radius.circular(15),
+                              bottomLeft: isAdmin
+                                  ? Radius.zero
+                                  : const Radius.circular(15),
                             ),
-                          ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              '$senderName: ${message.message}',
+                              style: const TextStyle(color: Colors.white),
+                              overflow: TextOverflow.visible,
+                            ),
+                          ),
                         ),
                       );
                     },
@@ -137,8 +149,8 @@ class _UserChatScreenState extends State<UserChatScreen> {
   void _sendMessage(String message, String userId) async {
     if (message.isNotEmpty) {
       await messagesCollection.doc(chatRoomId).collection('messages').add({
-        'sender': uidd,
-        'receiver': 'alora_admin',
+        'sender': userId,
+        'receiver': widget.adminId,
         'message': message,
         'timestamp': DateTime.now(),
       });

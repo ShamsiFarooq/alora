@@ -23,13 +23,13 @@ class OtherServiceView extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 20),
           child: Padding(
-            padding: const EdgeInsets.only(left: 20),
+            padding: const EdgeInsets.only(left: 10),
             child: Container(
               height: 300,
               child: GridView.count(
                 crossAxisCount: 2,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 8,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
                 childAspectRatio: 1.30,
                 children: const [
                   OtherServiceCard(
