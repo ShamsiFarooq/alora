@@ -1,9 +1,9 @@
 import 'package:alora/model/user_firbase.dart';
-import 'package:alora/screens/splash/splash_screen.dart';
+import 'package:alora/view/splash/splash_screen.dart';
 import 'package:alora/services/auth/auth_service.dart';
 import 'package:alora/services/auth/google_sign_in_provider.dart';
-import 'package:alora/services/bloc/location/location_bloc.dart';
-import 'package:alora/style/style.dart';
+import 'package:alora/control/location/location_bloc.dart';
+import 'package:alora/view/style/style.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,9 +40,7 @@ class MyApp extends StatelessWidget {
             home: const ScreenSplash(),
             theme: ThemeData(
               textTheme: const TextTheme(
-                titleMedium: TextStyle(
-                    color: color5,
-                    fontSize: 16), // default TextField input style
+                titleMedium: TextStyle(color: color5, fontSize: 16),
               ),
               brightness: Brightness.dark,
             ),
