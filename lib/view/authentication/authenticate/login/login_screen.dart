@@ -1,5 +1,6 @@
 import 'package:alora/services/auth/auth_service.dart';
 import 'package:alora/services/auth/google_sign_in_provider.dart';
+import 'package:alora/view/authentication/authenticate/login/terms_use.dart';
 import 'package:alora/view/authentication/authenticate/signUp/component/or_divoder.dart';
 import 'package:alora/view/authentication/authenticate/signUp/component/social_icon.dart';
 import 'package:alora/view/authentication/wrapper.dart';
@@ -113,7 +114,6 @@ class _ScreenLoginState extends State<ScreenLogin> {
                         text: 'LOGIN',
                         color: color3,
                         press: () async {
-                          print(email);
                           loginMethod();
                         },
                       ),
@@ -149,7 +149,8 @@ class _ScreenLoginState extends State<ScreenLogin> {
                             },
                           ),
                         ],
-                      )
+                      ),
+                      TermsOfUse(),
                     ],
                   ),
                 ),

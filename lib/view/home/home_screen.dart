@@ -18,6 +18,7 @@ class ScreenHome extends StatelessWidget {
         appBar: AppBar(
           elevation: 0.0,
           backgroundColor: color2,
+          automaticallyImplyLeading: false,
           title: const Text(
             "ALORA",
             style: TextStyle(

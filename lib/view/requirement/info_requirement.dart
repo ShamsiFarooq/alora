@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 import 'package:alora/services/database.dart';
 import 'package:alora/view/history/history.dart';
@@ -71,10 +73,34 @@ class UserRequirementScreen extends StatelessWidget {
                           contactNumber,
                         );
 
-                        QuickAlert.show(
+                        // QuickAlert.show(
+                        //   context: context,
+                        //   type: QuickAlertType.success,
+                        //   text: 'Request Completed Successfully!',
+                        // );
+                        showDialog(
                           context: context,
-                          type: QuickAlertType.success,
-                          text: 'Request Completed Successfully!',
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text(
+                                'Request Completed Successfully!',
+                                style: TextStyle(
+                                  color: color3,
+                                ),
+                              ),
+                              actions: [
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: color3,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context); // Close the dialog
+                                  },
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            );
+                          },
                         );
                       },
                       style: ElevatedButton.styleFrom(
