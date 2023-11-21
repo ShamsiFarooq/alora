@@ -24,6 +24,7 @@ class GoogleSignInProveder extends ChangeNotifier {
     final uid = currentUser?.uid;
     final displayName = currentUser?.displayName;
     final email = currentUser?.email;
+    // ignore: unused_local_variable
     final googleId = currentUser?.uid; // Use the same ID as uid for simplicity
 
     // Add user data to the database

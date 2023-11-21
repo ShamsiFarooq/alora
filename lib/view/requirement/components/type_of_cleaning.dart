@@ -14,6 +14,7 @@ class TypeOfCleaning extends StatefulWidget {
 class _TypeOfCleaningState extends State<TypeOfCleaning> {
   int selectedIndex = -1;
   @override
+  // ignore: override_on_non_overriding_member
   bool selected = false;
   final List<ItemModel> _chipsList = [
     ItemModel("Normal Cleaning", lightBlue, false),

@@ -1,5 +1,4 @@
 import 'package:alora/view/components/NumberContainer.dart';
-import 'package:alora/view/requirement/info_requirement.dart';
 import 'package:alora/view/style/style.dart';
 import 'package:flutter/material.dart';
 

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 
+// ignore: must_be_immutable
 class AddLocation extends StatelessWidget {
   AddLocation({
     super.key,
@@ -25,7 +26,7 @@ class AddLocation extends StatelessWidget {
       builder: (context, state) {
         controllerAddress.text = state.address;
 
-        location = controllerAddress.text;
+        //location = controllerAddress.text;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,6 +94,9 @@ class AddLocation extends StatelessWidget {
                 ),
                 controller: controllerAddress,
                 cursorColor: color5,
+                onChanged: (value) {
+                  location = value;
+                },
               ),
             )
           ],

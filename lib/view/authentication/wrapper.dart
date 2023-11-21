@@ -4,19 +4,25 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Wrapper extends StatelessWidget {
-  const Wrapper({super.key});
+  const Wrapper({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    // final users = Provider.of<Users?>(context);
-    var users = FirebaseAuth.instance.currentUser;
-
-    print("UID  : ${users?.uid}");
-
-    if (users == null) {
-      return const Authenticate();
-    } else {
-      return const BottomNavBar();
-    }
+    return FutureBuilder(
+      future: FirebaseAuth.instance.authStateChanges().first,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          // Return a loading indicator or some placeholder widget
+          return CircularProgressIndicator();
+        } else {
+          var user = FirebaseAuth.instance.currentUser;
+          if (user == null) {
+            return Authenticate();
+          } else {
+            return BottomNavBar();
+          }
+        }
+      },
+    );
   }
 }

@@ -17,6 +17,7 @@ class BodyLogin extends StatefulWidget {
 }
 
 class _BodyLoginState extends State<BodyLogin> {
+  // ignore: unused_field
   final AuthServices _auth = AuthServices();
 
   @override

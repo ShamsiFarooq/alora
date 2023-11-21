@@ -14,6 +14,7 @@ class NumberContainer extends StatefulWidget {
 class _NumberContainerState extends State<NumberContainer> {
   int selectedIndex = -1;
   @override
+  // ignore: override_on_non_overriding_member
   bool selected = false;
   final List<ItemModel> _chipsList = [
     ItemModel("2", lightBlue, false),

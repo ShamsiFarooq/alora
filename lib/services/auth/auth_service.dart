@@ -7,6 +7,7 @@ class AuthServices {
 
   //create user object based on FirebaseUser
   Users? userFromFirebaseUser(User user) {
+    // ignore: unnecessary_null_comparison
     return user != null ? Users(uid: user.uid) : null;
   }
 

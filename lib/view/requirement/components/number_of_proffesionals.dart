@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:alora/view/components/NumberContainer.dart';
 import 'package:alora/view/requirement/info_requirement.dart';
 import 'package:alora/view/style/style.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +51,7 @@ class _NumnerContainerProfessionalsState
     extends State<NumnerContainerProfessionals> {
   int selectedIndex = -1;
   @override
+  // ignore: override_on_non_overriding_member
   bool selected = false;
   final List<ItemModel> _chipsList = [
     ItemModel("1", lightBlue, false),

@@ -13,15 +13,15 @@ class HistoryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple[400],
+        backgroundColor: Colors.black,
         title: const Text(
-          'Requirement History',
+          'Order History',
           style: TextStyle(color: color1, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         leading: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.deepPurple[400],
+              backgroundColor: colorBlack,
             ),
             onPressed: () {
               Navigator.push(

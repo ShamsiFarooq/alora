@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:developer';
 import 'package:alora/services/database.dart';
 import 'package:alora/view/history/history.dart';
 import 'package:alora/view/requirement/components/personal_info.dart';
@@ -10,7 +9,6 @@ import 'package:alora/view/requirement/components/hours_section.dart';
 import 'package:alora/view/requirement/components/number_of_proffesionals.dart';
 import 'package:alora/view/style/style.dart';
 import 'package:flutter/material.dart';
-import 'package:quickalert/quickalert.dart';
 
 dynamic hours = 0;
 int professionals = 0;
@@ -73,11 +71,6 @@ class UserRequirementScreen extends StatelessWidget {
                           contactNumber,
                         );
 
-                        // QuickAlert.show(
-                        //   context: context,
-                        //   type: QuickAlertType.success,
-                        //   text: 'Request Completed Successfully!',
-                        // );
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
