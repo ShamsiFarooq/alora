@@ -17,13 +17,13 @@ class RoundedButton extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Container(
-      width: size.width * 0.8,
+      width: size.width * 0.77,
       child: ElevatedButton(
         child: Text(text),
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(29),
+            borderRadius: BorderRadius.circular(25),
           ),
         ),
         onPressed: press,

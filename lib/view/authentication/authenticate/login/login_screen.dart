@@ -38,7 +38,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return loading
-        ? Loading()
+        ? const Loading()
         : SafeArea(
             child: Scaffold(
               backgroundColor: color1,
@@ -110,6 +110,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                           },
                         ),
                       ),
+                      height15,
                       RoundedButton(
                         text: 'LOGIN',
                         color: color3,
@@ -120,14 +121,6 @@ class _ScreenLoginState extends State<ScreenLogin> {
                       height15,
                       AlreadyAccountCheck(
                         press: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) {
-                          //       return ScreenSignUp(toggleView:,);
-                          //     },
-                          //   ),
-                          // );
                           widget.toggleView();
                         },
                       ),
@@ -135,19 +128,38 @@ class _ScreenLoginState extends State<ScreenLogin> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          SocialIcon(
-                            iconSrc: 'lib/assets/svg/google-plus.svg',
-                            press: () async {
-                              final provider =
-                                  Provider.of<GoogleSignInProveder>(context,
-                                      listen: false);
-                              await provider.googleLogin().then((value) {
-                                return Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (context) => Wrapper()));
-                              });
-                            },
+                          SizedBox(
+                            height: size.height * 0.05,
+                            width: size.width * 0.78,
+                            child: ElevatedButton(
+                              style: const ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStatePropertyAll(color2)),
+                              onPressed: () async {
+                                final provider =
+                                    Provider.of<GoogleSignInProveder>(context,
+                                        listen: false);
+                                await provider.googleLogin().then((value) {
+                                  return Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const Wrapper()));
+                                });
+                              },
+                              child: const Text(
+                                'Google Sign In',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              ),
+                            ),
                           ),
+                          // SocialIcon(
+                          //   iconSrc: 'lib/assets/svg/google-plus.svg',
+                          //   press: () async {},
+                          // ),
                         ],
                       ),
                       TermsOfUse(),

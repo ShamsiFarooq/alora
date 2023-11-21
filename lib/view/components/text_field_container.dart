@@ -13,11 +13,11 @@ class TextFieldContainer extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5),
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 3),
-      width: size.width * 0.75,
-      height: size.height * 0.08,
+      width: size.width * 0.78,
+      height: size.height * 0.07,
       decoration: BoxDecoration(
         color: color2,
-        borderRadius: BorderRadius.circular(29),
+        borderRadius: BorderRadius.circular(15),
       ),
       child: child,
     );

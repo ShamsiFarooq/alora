@@ -44,11 +44,13 @@ class HistoryScreen extends StatelessWidget {
             return ListView.builder(
               itemCount: userRequirementsHistory.length,
               itemBuilder: (context, index) {
-                final requirement = userRequirementsHistory[index];
+                final reversedIndex =
+                    userRequirementsHistory.length - 1 - index;
+                final requirement = userRequirementsHistory[reversedIndex];
                 final status = requirement['status'];
-                final color = index % 2 == 0
+                final color = reversedIndex % 2 == 0
                     ? Color.fromARGB(255, 215, 44, 245) // First color
-                    : Colors.lightBlue; // Second color
+                    : Colors.lightBlue; // Second color // Second color
 
                 return Padding(
                   padding: const EdgeInsets.all(15.0),
