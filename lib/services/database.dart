@@ -43,6 +43,8 @@ class DatabaseServices {
       await orderCollection.doc(userId).set({'userrequirement': []});
     }
     try {
+      final Timestamp timestamp = Timestamp.now();
+
       final docData = await FirebaseFirestore.instance
           .collection("orders")
           .doc(userId)
@@ -61,6 +63,7 @@ class DatabaseServices {
           'contactname': nameInfo,
           'contactnumber': contactInfo,
           'status': null,
+          'timestamp': timestamp,
         });
         await FirebaseFirestore.instance
             .collection('orders')
